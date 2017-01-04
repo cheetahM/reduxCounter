@@ -1,0 +1,25 @@
+{
+  "name": "redux-counter",
+  "version": "1.0.0",
+  "description": "counter in Redux and vailla JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheetahM/reduxCounter.git"
+  },
+  "keywords": [
+    "Redux"
+  ],
+  "author": "Chetan Meshram",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheetahM/reduxCounter/issues"
+  },
+  "homepage": "https://github.com/cheetahM/reduxCounter#readme",
+  "dependencies": {
+    "redux": "^3.6.0"
+  }
+}

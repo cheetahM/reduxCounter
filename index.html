@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example</title>
+    <!-- step 1.1 Add Redux library -->
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <p>
+        Clicked: <span id="value">0</span> times
+        <button id="decrement">Decrease</button>
+        <button id="incrementAsync">Increment async</button>
+      </p>
+      <p>
+        <input type='text' id='val1' />
+        <span> + </span>
+        <input type='text' id='val2' />
+        <span>=</span>
+        <input type='text'id='result' />
+        <button id='sum'>Add</button>
+      </p>
+    </div>
+    <script src=""></script>
+    <script>
+
+      <!-- step 1.2: create store -->
+      var store = Redux.createStore(counterReducer);
+
+      var valueEl = document.getElementById('value');
+      var resultEl = document.getElementById('result');
+      function render() {
+        valueEl.innerHTML = store.getState().count;
+        resultEl.value = store.getState().sum;
+      }
+      render();
+
+      <!-- step 1.3: render -->
+      store.subscribe(render);
+
+
+
+      <!-- step2.1 : reducer -->
+      function counterReducer(currentState, action) {
+        var DEFAULT_STATE = {count:0, sum:0};
+        var nextState = Object.assign({}, currentState);
+        if(currentState == undefined) {
+          nextState = DEFAULT_STATE;
+          return nextState;
+        }
+        switch(action.type) {
+          case 'DECREMENT':
+            nextState.count -= 1;
+            return nextState;
+          case 'INCREMENT':
+            nextState.count += 1;
+            return nextState;
+          case 'ADD':
+            nextState.sum = parseInt(action.a) + parseInt(action.b);
+            return nextState;
+          default:
+            return nextState;
+        }
+      }
+      document.getElementById('decrement')
+        .addEventListener('click', function () {
+          //step 2.1
+          var action = { type: 'DECREMENT'};
+          store.dispatch(action);
+        })
+      document.getElementById('incrementAsync')
+        .addEventListener('click', function () {
+          //step 2.1
+          var action = { type: 'INCREMENT'};
+          store.dispatch(action);
+        })
+
+        document.getElementById('sum')
+          .addEventListener('click', function() {
+            var a = document.getElementById('val1').value;
+            var b = document.getElementById('val2').value;
+            var action = {type: 'ADD', a:a, b:b};
+            store.dispatch(action);
+          })
+
+    </script>
+  </body>
+</html>
